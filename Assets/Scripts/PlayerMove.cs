@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 using UnityEngine.UI;//UIを扱うときは追加する
+using UnityEngine.SceneManagement;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -19,6 +19,7 @@ public class PlayerMove : MonoBehaviour
     private float resetTime = 2;
     //リセットするかどうかのフラグ
     private bool reset;
+
 
 
     // Start is called before the first frame update
@@ -86,17 +87,18 @@ public class PlayerMove : MonoBehaviour
         if(hit.gameObject.tag == "Goal")
         {
             //GameObjectを有効化する
-            goal_text.enabled = true;
-            reset = true;
+            //goal_text.enabled = true;
+            //reset = true;
+            Clear();
         }
 
-        if(reset)
+        /*if(reset)
         {
             resetTime -= Time.deltaTime;
             if(resetTime < 0){
                 Reset();
             }
-        }
+        }*/
     }
 
 	private void Reset()
@@ -118,5 +120,13 @@ public class PlayerMove : MonoBehaviour
         resetTime = 2;
 
         reset = false;
+
+        Timer.seconds = 0f;
+
+        Timer.minute = 0;
 	}
+
+    private void Clear(){
+        SceneManager.LoadScene("Result");
+    }
 }
